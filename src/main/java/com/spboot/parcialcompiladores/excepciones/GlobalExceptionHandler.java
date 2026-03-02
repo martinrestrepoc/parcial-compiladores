@@ -1,6 +1,5 @@
 package com.spboot.parcialcompiladores.excepciones;
 
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +14,17 @@ import java.util.Map;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<ApiError> handleBadRequestException(BadRequestException ex,
+                                                              HttpServletRequest req) {
+        ApiError apiError = new ApiError();
+        apiError.setTimestamp(Instant.now());
+        apiError.setStatus(HttpStatus.BAD_REQUEST.value());
+        apiError.setError(ex.getMessage());
+        apiError.setPath(req.getRequestURI());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiError);
+    }
+
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<ApiError> handleNotFoundException(NotFoundException ex,
                                                             HttpServletRequest re){
