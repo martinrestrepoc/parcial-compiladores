@@ -26,5 +26,7 @@ public class FighterMapper {
         fighter.setSpecialSkill(dto.specialSkill());
         fighter.setBio(dto.bio());
         fighter.setBackstory(dto.backstory());
+        fighter.setWins(dto.wins());
+        fighter.setLosses(dto.losses());
     }
 }

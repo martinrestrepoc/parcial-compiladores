@@ -29,5 +29,11 @@ public record FighterUpdateDTO (
         String bio,
 
         @Size(max = 4000)
-        String backstory
+        String backstory,
+
+        @Min(value = 0, message = "Wins must be >= 0")
+        int wins,
+
+        @Min(value = 0, message = "Losses must be >= 0")
+        int losses
 ){}
